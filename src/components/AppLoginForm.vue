@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { use } from "chai";
 import { mapActions } from "pinia";
 import useUserStore from "../stores/user";
 
@@ -80,7 +79,7 @@ export default {
 
       this.login_alert_variant = "bg-green-500";
       this.login_alert_msg = "Success! You are logged in.";
-      console.log(values);
+      window.location.reload();
     },
   },
 };
