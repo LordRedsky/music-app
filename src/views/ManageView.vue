@@ -170,3 +170,9 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  name: "Manage",
+};
+</script>
