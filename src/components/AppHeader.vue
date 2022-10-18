@@ -5,7 +5,7 @@
       <!-- App Name -->
       <RouterLink
         class="text-white font-bold uppercase text-2xl mr-4"
-        to="/"
+        :to="{ name: 'home' }"
         exact-active-class="no-active"
         >Music</RouterLink
       >
@@ -15,7 +15,7 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <RouterLink to="/about" class="px-2 text-white">About</RouterLink>
+            <RouterLink :to="{ name: 'about' }" class="px-2 text-white">About</RouterLink>
           </li>
           <li v-if="!userStore.userLoggedIn">
             <a class="px-2 text-white" @click.prevent="toggleAuthModal" href="#"
@@ -24,7 +24,9 @@
           </li>
           <template v-else>
             <li>
-              <RouterLink class="px-2 text-white" to="/manage">Manage</RouterLink>
+              <RouterLink class="px-2 text-white" :to="{ name: 'manage' }"
+                >Manage</RouterLink
+              >
             </li>
             <li>
               <a class="px-2 text-white" href="#" @click.prevent="userStore.signOut"
