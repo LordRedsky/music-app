@@ -32,7 +32,7 @@
         <div class="flex h-4 overflow-hidden bg-gray-200 rounded">
           <!-- Inner Progress Bar -->
           <div
-            class="transition-all progress-bar bg-blue-400"
+            class="transition-all progress-bar"
             :class="upload.variant"
             :style="{ width: upload.current_progress + '%' }"
           ></div>
@@ -47,6 +47,7 @@ import { storage, auth, songsCollection } from "../includes/firebase";
 
 export default {
   name: "Upload",
+  props: ["addSong"],
   data() {
     return {
       is_dragover: false,
@@ -103,7 +104,10 @@ export default {
             };
 
             song.url = await task.snapshot.ref.getDownloadURL();
-            await songsCollection.add(song);
+            const songRef = await songsCollection.add(song);
+            const songSnapshot = await songRef.get();
+
+            this.addSong(songSnapshot);
 
             this.uploads[uploadIndex].variant = "bg-green-400";
             this.uploads[uploadIndex].icon = "fas fa-check";
@@ -112,11 +116,6 @@ export default {
         );
       });
     },
-    // cancelUploads() {
-    //   this.uploads.forEach((upload) => {
-    //     upload.task.cancel();
-    //   });
-    // },
   },
 
   beforeUnmount() {
