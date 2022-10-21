@@ -12,32 +12,38 @@
       </div>
       <!-- Current Position -->
       <div class="float-left w-7 h-7 leading-3 text-gray-400 mt-0 text-lg w-14 ml-5 mt-1">
-        <span class="player-currenttime">00:00</span>
+        <span class="player-currenttime">{{ seek }}</span>
       </div>
       <!-- Scrub -->
       <div class="float-left w-7 h-7 leading-3 ml-7 mt-2 player-scrub">
-        <div class="absolute left-0 right-0 text-lg text-center mx-auto player-song-info">
-          <span class="song-title">Song Title</span> by
-          <span class="song-artist">Artist</span>
+        <div
+          class="absolute left-0 right-0 text-lg text-center mx-auto player-song-info"
+          v-if="current_song.modified_name"
+        >
+          <span class="song-title font-bold">{{ current_song.modified_name }}</span> by
+          <span class="song-artist">{{ current_song.display_name }}</span>
         </div>
         <!-- Scrub Container  -->
         <span
           class="block w-full h-2 rounded m-1 mt-2 bg-gray-200 relative cursor-pointer"
         >
           <!-- Player Ball -->
-          <span class="absolute top-neg-8 text-gray-800 text-lg" style="left: 50%">
+          <span
+            class="absolute top-neg-8 text-gray-800 text-lg"
+            :style="{ left: playerProgress }"
+          >
             <i class="fas fa-circle"></i>
           </span>
           <!-- Player Progress Bar-->
           <span
             class="block h-2 rounded bg-gradient-to-r from-green-500 to-green-400"
-            style="width: 50%"
+            :style="{ width: playerProgress }"
           ></span>
         </span>
       </div>
       <!-- Duration -->
       <div class="float-left w-7 h-7 leading-3 text-gray-400 mt-0 text-lg w-14 ml-8 mt-1">
-        <span class="player-duration">03:06</span>
+        <span class="player-duration">{{ duration }}</span>
       </div>
     </div>
   </div>
@@ -53,7 +59,13 @@ export default {
     ...mapActions(usePlayerStore, ["toggleAudio"]),
   },
   computed: {
-    ...mapState(usePlayerStore, ["playing"]),
+    ...mapState(usePlayerStore, [
+      "playing",
+      "duration",
+      "seek",
+      "playerProgress",
+      "current_song",
+    ]),
   },
 };
 </script>
