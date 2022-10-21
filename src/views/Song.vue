@@ -164,8 +164,25 @@ export default {
       return;
     }
 
+    const { sort } = this.$route.query;
+
+    this.sort = sort === "1" || sort === "2" ? sort : "1";
+
     this.song = docSnapshot.data();
     this.getComments();
+  },
+  watch: {
+    sort(newVal) {
+      if (newVal === this.$route.query.sort) {
+        return;
+      }
+      
+      this.$router.push({
+        query: {
+          sort: newVal,
+        },
+      });
+    },
   },
 };
 </script>
