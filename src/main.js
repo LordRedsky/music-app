@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { auth } from "./includes/firebase";
+import { registerSW } from "virtual:pwa-register";
 
 import App from "./App.vue";
 import router from "./router";
@@ -10,6 +11,8 @@ import I18n from "./includes/i18n";
 
 import "./assets/base.css";
 import "./assets/main.css";
+
+registerSW({ immediate: true });
 
 let app;
 
@@ -21,10 +24,10 @@ auth.onAuthStateChanged(() => {
         app.use(router);
         app.use(VeeValidatePlugin);
         app.use(I18n)
-        
+
         app.directive("Icon", Icon);
 
         app.mount("#app");
-    }
-})
+    };
+});
 
