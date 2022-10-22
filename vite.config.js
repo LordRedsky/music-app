@@ -11,7 +11,20 @@ export default defineConfig({
     registerType: "autoUpdate",
     devOptions: {
       enabled: true,
-    }
+    },
+    manifest: {
+      name: "Music App",
+      short_name: 'MyApp',
+      description: 'enjoy listening to great music!',
+      theme_color: "#ff5e3e",
+      icon: [
+        {
+          source: "assets/img/pwa-192x192.png",
+          size: "192x192",
+          type: "image/png",
+        }
+      ]
+    },
   })],
   resolve: {
     alias: {
