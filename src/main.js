@@ -9,11 +9,15 @@ import VeeValidatePlugin from "./includes/validation";
 import Icon from "./directives/icon";
 import I18n from "./includes/i18n";
 import GlobalComponents from "./includes/_globals";
+import progressBar from "./includes/progress-bar";
 
 import "./assets/base.css";
 import "./assets/main.css";
+import "nprogress/nprogress.css";
 
 registerSW({ immediate: true });
+
+progressBar(router)
 
 let app;
 
