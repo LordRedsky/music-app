@@ -67,6 +67,7 @@ export default {
           return;
         }
 
+        //! for offline condition
         if (!navigator.onLine) {
           this.uploads.push({
             task: {},

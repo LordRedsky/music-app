@@ -8,6 +8,7 @@ import router from "./router";
 import VeeValidatePlugin from "./includes/validation";
 import Icon from "./directives/icon";
 import I18n from "./includes/i18n";
+import GlobalComponents from "./includes/_globals";
 
 import "./assets/base.css";
 import "./assets/main.css";
@@ -23,7 +24,8 @@ auth.onAuthStateChanged(() => {
         app.use(createPinia());
         app.use(router);
         app.use(VeeValidatePlugin);
-        app.use(I18n)
+        app.use(I18n);
+        app.use(GlobalComponents);
 
         app.directive("Icon", Icon);
 
