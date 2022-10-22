@@ -1,5 +1,18 @@
 {
   "home": {
     "listen": "Dengarkan Musik Keren!"
+  },
+  "manage": {
+    "my_songs": "Lagu Saya"
+  },
+  "upload": {
+    "upload": "Unggah",
+    "drop_file": "Letakkan file Anda di sini"
+  },
+  "header": {
+    "about": "Tentang",
+    "manage": "Kelola",
+    "login_register": "Masuk / Daftar",
+    "logout": "Keluar"
   }
 }

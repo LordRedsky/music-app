@@ -15,21 +15,25 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <RouterLink :to="{ name: 'about' }" class="px-2 text-white">About</RouterLink>
+            <RouterLink :to="{ name: 'about' }" class="px-2 text-white">{{
+              $t("header.about")
+            }}</RouterLink>
           </li>
           <li v-if="!userStore.userLoggedIn">
-            <a class="px-2 text-white" @click.prevent="toggleAuthModal" href="#"
-              >Login / Register</a
-            >
+            <a class="px-2 text-white" @click.prevent="toggleAuthModal" href="#">{{
+              $t("header.login_register")
+            }}</a>
           </li>
           <template v-else>
             <li>
-              <RouterLink class="px-2 text-white" :to="{ name: 'manage' }"
-                >Manage</RouterLink
-              >
+              <RouterLink class="px-2 text-white" :to="{ name: 'manage' }">{{
+                $t("header.manage")
+              }}</RouterLink>
             </li>
             <li>
-              <a class="px-2 text-white" href="#" @click.prevent="signOut">Logout</a>
+              <a class="px-2 text-white" href="#" @click.prevent="signOut">{{
+                $t("header.logout")
+              }}</a>
             </li>
           </template>
         </ul>
