@@ -12,7 +12,7 @@ export default defineConfig({
     devOptions: {
       enabled: true,
     },
-    includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+    // includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
     manifest: {
       name: "Music App",
       short_name: 'MyApp',
@@ -20,17 +20,20 @@ export default defineConfig({
       theme_color: "#ff5e3e",
       icons: [
         {
-          src: 'pwa-192x192.png',
+          source: 'assets/img/pwa-192x192.png',
           sizes: '192x192',
           type: 'image/png'
         },
         {
-          src: 'pwa-512x512.png',
+          source: 'assets/img/pwa-512x512.png',
           sizes: '512x512',
           type: 'image/png'
         }
       ]
     },
+    workbox: {
+      globPatterns: ["**/*.{js,css,html,png,jpg,}"],
+    }
   })],
   resolve: {
     alias: {
