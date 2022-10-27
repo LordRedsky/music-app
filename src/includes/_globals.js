@@ -1,4 +1,5 @@
-import _ from "lodash";
+import upperFirst from "lodash/upperFirst";
+import camelCase from "lodash/camelCase";
 
 export default {
     install(app) {
@@ -7,7 +8,7 @@ export default {
         })
 
         Object.entries(baseComponents).forEach(([path, module]) => {
-            const componentName = _.upperFirst(_.camelCase(path.split("/").pop().replace(/\.\w+$/, "")));
+            const componentName = upperFirst(camelCase(path.split("/").pop().replace(/\.\w+$/, "")));
 
             // export default
             app.component(`Base${componentName}`, module.default);
