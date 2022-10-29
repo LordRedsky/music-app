@@ -43,12 +43,7 @@
             {{ comment_alert_message }}
           </div>
           <VeeForm :validation-schema="schema" @submit="addComment" v-if="userLoggedIn">
-            <VeeField
-              as="textarea"
-              name="comment"
-              class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4"
-              placeholder="Your comment here..."
-            ></VeeField>
+            <AppEmojiInput v-model="emoji" :options="{ position: 'bottom' }" />
             <ErrorMessage class="text-red-600" name="comment" />
             <button
               type="submit"
@@ -95,11 +90,13 @@ import { songsCollection, auth, commentsCollection } from "../includes/firebase"
 import { mapState, mapActions } from "pinia";
 import useUserStore from "../stores/user";
 import usePlayerStore from "../stores/player";
+import AppEmojiInput from "../components/AppEmojiInput.vue";
 
 export default {
   name: "Song",
   data() {
     return {
+      emoji: "",
       song: {},
       comments: [],
       sort: "1",
@@ -120,19 +117,17 @@ export default {
         if (this.sort === "1") {
           return new Date(b.datePosted) - new Date(a.datePosted);
         }
-
         return new Date(a.datePosted) - new Date(b.datePosted);
       });
     },
   },
   methods: {
     ...mapActions(usePlayerStore, ["newSong"]),
-
     async addComment(values, { resetForm }) {
+      console.log("emoji", this.emoji);
       this.comment_in_submission = true;
       this.comment_show_alert = true;
       this.comment_alert_variant = "bg-blue-500";
-
       const comment = {
         content: values.comment,
         datePosted: new Date().toString(),
@@ -140,30 +135,22 @@ export default {
         name: auth.currentUser.displayName,
         uid: auth.currentUser.uid,
       };
-
       await commentsCollection.add(comment);
-
       this.song.comment_count++;
       await songsCollection.doc(this.$route.params.id).update({
         comment_count: this.song.comment_count,
       });
-
       this.getComments();
-
       this.comment_in_submission = false;
       this.comment_alert_variant = "bg-green-500";
       this.comment_alert_message = "Comment added!";
-
       resetForm();
     },
-
     async getComments() {
       const snapshot = await commentsCollection
         .where("sid", "==", this.$route.params.id)
         .get();
-
       this.comments = [];
-
       snapshot.forEach((document) => {
         this.comments.push({
           docId: document.id,
@@ -172,31 +159,24 @@ export default {
       });
     },
   },
-
   async beforeRouteEnter(to, from, next) {
     const docSnapshot = await songsCollection.doc(to.params.id).get();
-
     next((vm) => {
       if (!docSnapshot.exists) {
         vm.$router.push({ name: "home" });
         return;
       }
-
       const { sort } = vm.$route.query;
-
       vm.sort = sort === "1" || sort === "2" ? sort : "1";
-
       vm.song = docSnapshot.data();
       vm.getComments();
     });
   },
-
   watch: {
     sort(newVal) {
       if (newVal === this.$route.query.sort) {
         return;
       }
-
       this.$router.push({
         query: {
           sort: newVal,
@@ -204,5 +184,12 @@ export default {
       });
     },
   },
+  components: { AppEmojiInput },
 };
 </script>
+
+<style scoped>
+.emoji {
+  z-index: 999999;
+}
+</style>
