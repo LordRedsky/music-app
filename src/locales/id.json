@@ -1,6 +1,11 @@
 {
   "home": {
-    "listen": "Dengarkan Musik Keren!"
+    "listen": "Dengarkan Musik Keren!",
+    "description": "Dengarkan musik dengan aneka genre dari berbagai artis. Kamu juga bisa mengupload musik mu sendiri disini dengan melakukan register terlebih dahulu."
+  },
+  "about": {
+    "description": "Aplikasi ini merupakan project yang saya buat pada saat mengikuti course Zero To Mastery (ZTM) yaitu Complete Vue Developer 2022. Aplikasi ini saya bangun dengan menggunakan Vue.JS, Pinia sebagai state management, Vue Router, Vee Validate untuk validasi form, Vue i18n untuk keperluan terjemahan, Firebase untuk penyimpanan, dan Vitest untuk testing. Setelah melakukan registrasi, kamu bisa melakukan upload, edit dan delete lagu kesukaanmu dan bisa langsung kamu dengarkan. Kamu juga bisa menulis komentar untuk lagu-lagu yang ada.",
+    "github": "Klik disini untuk melihat source code"
   },
   "manage": {
     "my_songs": "Lagu Saya"
