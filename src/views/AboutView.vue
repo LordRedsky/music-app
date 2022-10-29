@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .about {
   margin: 30px auto;
   text-align: center;

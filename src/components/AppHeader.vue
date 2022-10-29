@@ -2,12 +2,14 @@
   <!-- Header -->
   <header id="header" class="bg-gray-700">
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
+      <img class="music-icon" src="../../public/188-microphone-recording.svg" alt="" />
       <!-- App Name -->
       <RouterLink
         class="text-white font-bold uppercase text-2xl mr-4"
         :to="{ name: 'home' }"
         exact-active-class="no-active"
-        >Music</RouterLink
+      >
+        Music</RouterLink
       >
 
       <div class="flex flex-grow items-center">
@@ -81,3 +83,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.music-icon {
+  width: 50px;
+  margin-right: 20px;
+}
+</style>
